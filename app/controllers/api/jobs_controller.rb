@@ -1,4 +1,5 @@
 class Api::JobsController < ApplicationController
+  before_action :set_board, only: %i[new create]
   before_action :set_job, only: %i[show update destroy]
 
   def index
@@ -11,7 +12,7 @@ class Api::JobsController < ApplicationController
   end
 
   def create
-    @job = job.new(job_params)
+    @job = Job.new(job_params)
 
     if @job.save
       render json: @job, status: :created
@@ -33,6 +34,10 @@ class Api::JobsController < ApplicationController
   end
 
   private
+
+  def set_board
+    @board = Board.find(params[:board_id])
+  end
 
   def set_job
     @job = Job.find(params[:id])
