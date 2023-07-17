@@ -1,17 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-const JobList = ({ jobs }) => {
-  const renderJobs = (jobArray) =>
-    jobArray.map((job) => <li key={job.id}>{job.title}</li>);
-
-  return (
-    <section>
-      <h2>jobs</h2>
-      <ul>{renderJobs(jobs)}</ul>
-    </section>
-  );
-};
+const JobList = ({ jobs }) =>
+  jobs.map((job) => (
+    <li key={job.id}>
+      <Link to={`/jobs/${job.id}`}>{job.title}</Link>
+    </li>
+  ));
 
 JobList.propTypes = {
   jobs: PropTypes.arrayOf(
@@ -22,7 +18,7 @@ JobList.propTypes = {
       url: PropTypes.string,
       board_id: PropTypes.number,
       note: PropTypes.string,
-      published: PropTypes.bool,
+      status: PropTypes.string,
     })
   ).isRequired,
 };

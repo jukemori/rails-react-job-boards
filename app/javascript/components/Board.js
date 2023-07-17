@@ -1,6 +1,9 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import Header from "./Header";
 import JobList from "./JobList";
+import Job from "./Job";
 
 const Board = () => {
   const [jobs, setJobs] = useState([]);
@@ -29,8 +32,17 @@ const Board = () => {
     <>
       <Header />
       {isError && <p>Something went wrong. Check the console.</p>}
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <JobList jobs={jobs} />
 
-      {isLoading ? <p>Loading...</p> : <JobList jobs={jobs} />}
+          <Routes>
+            <Route path=":id" element={<Job jobs={jobs} />} />
+          </Routes>
+        </>
+      )}
     </>
   );
 };
