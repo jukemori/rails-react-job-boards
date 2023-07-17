@@ -13,5 +13,6 @@ module.exports = {
     ],
     "no-console": 0,
     "no-alert": 0,
+    "react/prop-types": "off",
   },
 };
